@@ -1,4 +1,4 @@
-const CITIES = [
+export const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',
@@ -7,8 +7,19 @@ const CITIES = [
   'Dusseldorf'
 ] as const;
 
-const Setting = {
+export const Setting = {
   placeCardCount: 6,
-} as const;
+};
 
-export { CITIES, Setting };
+export enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
+}
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
