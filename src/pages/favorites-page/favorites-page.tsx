@@ -14,7 +14,6 @@ type OfferByGroup = {
 function FavoritesPage(props: FavoritesPageProps): JSX.Element {
   const favoriteOffers = props.offers.filter((offer) => offer.isFavorite);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const favoriteOffersByGroup = Object.groupBy(
     favoriteOffers,
     (offer: Offer) => offer.city.name

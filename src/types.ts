@@ -1,3 +1,19 @@
+declare global {
+  interface ObjectConstructor {
+    groupBy<Item, Key extends PropertyKey>(
+      items: Iterable<Item>,
+      keySelector: (item: Item, index: number) => Key
+    ): Record<Key, Item[]>;
+  }
+
+  interface MapConstructor {
+    groupBy<Item, Key>(
+      items: Iterable<Item>,
+      keySelector: (item: Item, index: number) => Key
+    ): Map<Key, Item[]>;
+  }
+}
+
 export type AppProps = {
   placeCardCount: number;
   offers: Offer[];
@@ -26,6 +42,8 @@ export type Offer = {
   rating: number;
   previewImage: string;
 };
+
+export type Offers = Offer[];
 
 export type PlaceCardProps = {
   offer: Offer;
