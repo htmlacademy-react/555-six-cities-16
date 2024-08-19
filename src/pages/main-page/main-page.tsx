@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import Header from '../../components/header/header';
-import PlaceCard from '../../components/place-card/place-card';
 import LocationList from '../../components/locations-list/locations-list';
+import { AppProps, Offer } from '../../types';
+import PlaceCardList from '../../components/place-card-list/place-card-list';
 
-type MainPageProps = {
-  placeCardCount: number;
-}
+function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
+  const [currentOffer, setCurrentOffer] = useState<Offer | null>(null);
+  window.console.log(currentOffer);
 
-function MainPage({ placeCardCount }: MainPageProps): JSX.Element {
+  const cityOffers = offers
+    .filter((offer) => offer.city.name === 'Amsterdam')
+    .slice(0, placeCardCount);
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -38,15 +43,7 @@ function MainPage({ placeCardCount }: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-              </div>
+              <PlaceCardList offers={cityOffers} onActiveCardChange={setCurrentOffer}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
