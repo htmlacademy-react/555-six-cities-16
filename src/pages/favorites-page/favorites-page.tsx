@@ -1,5 +1,5 @@
 import { Offer } from '../../types';
-import FavoriteCard from '../../components/favorite-card/favorite-card';
+import Card from '../../components/card/card';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 
@@ -38,7 +38,15 @@ function FavoritesPage(props: FavoritesPageProps): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {favoriteOffersByGroup[city].map((offer) => (
-                      <FavoriteCard offers={offer} key={offer.id} />
+                      <Card
+                        offers={offer}
+                        key={offer.id}
+                        options={{
+                          classNamePrefix: 'favorites',
+                          imageWidth: 150,
+                          imageHeight: 110
+                        }}
+                      />
                     ))}
                   </div>
                 </li>

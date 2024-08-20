@@ -4,39 +4,45 @@ import { getRatingPercent } from '../../utils';
 import { generatePath } from 'react-router';
 import { Offer } from '../../types';
 
-type PlaceCardProps = {
+type CardProps = {
   offers: Offer;
-  onActiveCardChange: React.Dispatch<React.SetStateAction<Offer | null>>;
+  options?: {
+    classNamePrefix?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+  };
+  onActiveCardChange?: React.Dispatch<React.SetStateAction<Offer | null>>;
 };
 
-function PlaceCard(props: PlaceCardProps): JSX.Element {
-  const { offers, onActiveCardChange } = props;
+function Card(props: CardProps): JSX.Element {
+  const { offers, options = {}, onActiveCardChange } = props;
   const ratingPercent = getRatingPercent(offers.rating);
   const id = offers.id;
+  const {classNamePrefix = 'cities', imageWidth = 260, imageHeight = 200} = options;
 
   return (
     <article
-      className="cities__card place-card"
-      onMouseEnter={() => onActiveCardChange({ ...offers })}
-      onMouseLeave={() => onActiveCardChange(null)}
+      className={`${classNamePrefix}__card place-card`}
+      onMouseEnter={() => onActiveCardChange && onActiveCardChange(offers)}
+      onMouseLeave={() => onActiveCardChange && onActiveCardChange(null)}
     >
       {offers.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={`${classNamePrefix}__image-wrapper place-card__image-wrapper`}>
+        <Link to={generatePath(AppRoute.Offer, {id})}>
           <img
             className="place-card__image"
             src={offers.previewImage}
-            width="260"
-            height="200"
+            width={imageWidth}
+            height={imageHeight}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${classNamePrefix}__card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offers.price}</b>
@@ -73,4 +79,4 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default Card;

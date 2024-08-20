@@ -43,10 +43,16 @@ export type Offer = {
   previewImage: string;
 };
 
-export type Offers = Offer[];
+export type User = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
 
-export type PlaceCardProps = {
-  offer: Offer;
-  key: string;
-  onActiveCardChange: React.Dispatch<React.SetStateAction<Offer>>;
+export type Comment = {
+  id: string;
+  date: string;
+  user: User;
+  comment: string;
+  rating: number;
 };

@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Offer } from '../../types';
-import PlaceCard from '../place-card/place-card';
+import Card from '../card/card';
 
-type PlaceCardListProps = {
+type CitiesListProps = {
   offers: Offer[];
   onActiveCardChange: React.Dispatch<React.SetStateAction<Offer | null>>;
 };
 
-function PlaceCardList(props: PlaceCardListProps): JSX.Element {
+function CitiesList(props: CitiesListProps): JSX.Element {
   const { offers, onActiveCardChange } = props;
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
   onActiveCardChange(activeOffer);
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer: Offer) => (
-        <PlaceCard
+      {offers.map((offer) => (
+        <Card
           offers={offer}
           key={offer.id}
           onActiveCardChange={setActiveOffer}
@@ -25,4 +25,4 @@ function PlaceCardList(props: PlaceCardListProps): JSX.Element {
   );
 }
 
-export default PlaceCardList;
+export default CitiesList;

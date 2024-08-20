@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from '../../components/header/header';
 import LocationList from '../../components/locations-list/locations-list';
 import { AppProps, Offer } from '../../types';
-import PlaceCardList from '../../components/place-card-list/place-card-list';
+import CitiesList from '../../components/cities-list/cities-list';
 
 function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
   const [currentOffer, setCurrentOffer] = useState<Offer | null>(null);
@@ -43,7 +43,7 @@ function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCardList offers={cityOffers} onActiveCardChange={setCurrentOffer}/>
+              <CitiesList offers={cityOffers} onActiveCardChange={setCurrentOffer}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
