@@ -1,3 +1,5 @@
+import { AuthorizationStatus } from './const';
+
 declare global {
   interface ObjectConstructor {
     groupBy<Item, Key extends PropertyKey>(
@@ -17,6 +19,10 @@ declare global {
 export type AppProps = {
   placeCardCount: number;
   offers: Offer[];
+};
+
+export type MainProps = {
+  authorizationStatus: AuthorizationStatus;
 };
 
 export type Location = {
@@ -55,4 +61,22 @@ export type Comment = {
   user: User;
   comment: string;
   rating: number;
+};
+
+export type OfferDetails = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: City;
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: User;
+  images: string[];
+  maxAdults: number;
 };

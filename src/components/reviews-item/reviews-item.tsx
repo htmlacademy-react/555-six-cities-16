@@ -1,16 +1,19 @@
 import { Comment } from '../../types';
 import { getRatingPercent } from '../../utils';
 
-type OfferCommentProps = {
+type ReviewsItemProps = {
   comment: Comment;
 }
 
-function OfferComment(props: OfferCommentProps): JSX.Element {
+function ReviewsItem(props: ReviewsItemProps): JSX.Element {
   const { comment } = props;
   const ratingPercent = getRatingPercent(comment.rating);
   const date = new Date(comment.date);
   const dateString = date.toISOString().slice(0, 10);
-  const dateText = date.toLocaleString('en-US', {month: 'long', year: 'numeric'});
+  const dateText = date.toLocaleString('en-US', {
+    month: 'long',
+    year: 'numeric'
+  });
 
   return (
     <li className="reviews__item">
@@ -38,4 +41,4 @@ function OfferComment(props: OfferCommentProps): JSX.Element {
   );
 }
 
-export default OfferComment;
+export default ReviewsItem;

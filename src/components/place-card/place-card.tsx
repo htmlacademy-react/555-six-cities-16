@@ -4,7 +4,7 @@ import { getRatingPercent } from '../../utils';
 import { generatePath } from 'react-router';
 import { Offer } from '../../types';
 
-type CardProps = {
+type PlaceCardProps = {
   offers: Offer;
   options?: {
     classNamePrefix?: string;
@@ -14,11 +14,15 @@ type CardProps = {
   onActiveCardChange?: React.Dispatch<React.SetStateAction<Offer | null>>;
 };
 
-function Card(props: CardProps): JSX.Element {
+function PlaceCard(props: PlaceCardProps): JSX.Element {
   const { offers, options = {}, onActiveCardChange } = props;
   const ratingPercent = getRatingPercent(offers.rating);
   const id = offers.id;
-  const {classNamePrefix = 'cities', imageWidth = 260, imageHeight = 200} = options;
+  const {
+    classNamePrefix = 'cities',
+    imageWidth = 260,
+    imageHeight = 200
+  } = options;
 
   return (
     <article
@@ -48,18 +52,11 @@ function Card(props: CardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{offers.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={'place-card__bookmark-button button'.concat(
-              offers.isFavorite ? ' place-card__bookmark-button--active' : ''
-            )}
-            type="button"
-          >
+          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">
-              {offers.isFavorite ? 'In bookmarks' : 'To bookmarks'}
-            </span>
+            <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -79,4 +76,4 @@ function Card(props: CardProps): JSX.Element {
   );
 }
 
-export default Card;
+export default PlaceCard;
