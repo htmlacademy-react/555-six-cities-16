@@ -1,16 +1,13 @@
-import { useState } from 'react';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
 
-type PlaceCardListProps = {
+type CitiesListProps = {
   offers: Offer[];
   onActiveCardChange: React.Dispatch<React.SetStateAction<Offer | null>>;
 };
 
-function PlaceCardList(props: PlaceCardListProps): JSX.Element {
+function CitiesList(props: CitiesListProps): JSX.Element {
   const { offers, onActiveCardChange } = props;
-  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
-  onActiveCardChange(activeOffer);
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -18,11 +15,11 @@ function PlaceCardList(props: PlaceCardListProps): JSX.Element {
         <PlaceCard
           offers={offer}
           key={offer.id}
-          onActiveCardChange={setActiveOffer}
+          onActiveCardChange={onActiveCardChange}
         />
       ))}
     </div>
   );
 }
 
-export default PlaceCardList;
+export default CitiesList;

@@ -2,15 +2,12 @@ import { useState } from 'react';
 import Header from '../../components/header/header';
 import LocationList from '../../components/locations-list/locations-list';
 import { AppProps, Offer } from '../../types';
-import PlaceCardList from '../../components/place-card-list/place-card-list';
+import CitiesList from '../../components/cities-list/cities-list';
+import Map from '../../components/map/map';
 
-function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
-  const [currentOffer, setCurrentOffer] = useState<Offer | null>(null);
-  window.console.log(currentOffer);
-
-  const cityOffers = offers
-    .filter((offer) => offer.city.name === 'Amsterdam')
-    .slice(0, placeCardCount);
+function MainPage({ offers }: AppProps): JSX.Element {
+  const [pointedOffer, setPointedOffer] = useState<Offer | null>(null);
+  const points = offers.map((offer) => ({id: offer.id, location: offer.location}));
 
   return (
     <div className="page page--gray page--main">
@@ -27,7 +24,7 @@ function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placeCardCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -43,11 +40,9 @@ function MainPage({ placeCardCount, offers }: AppProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCardList offers={cityOffers} onActiveCardChange={setCurrentOffer}/>
+              <CitiesList offers={offers} onActiveCardChange={setPointedOffer}/>
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <Map city={offers[0].city} points={points} selectedPoint={{id: pointedOffer?.id, location: pointedOffer?.location}} />
           </div>
         </div>
       </main>
