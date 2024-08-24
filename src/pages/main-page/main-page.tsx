@@ -6,13 +6,6 @@ import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 
 function MainPage({ offers }: AppProps): JSX.Element {
-  /*const [currentOffer, setCurrentOffer] = useState<Offer | null>(null);
-  window.console.log(currentOffer);
-
-  const cityOffers = offers
-    .filter((offer) => offer.city.name === 'Amsterdam')
-    .slice(0, placeCardCount);
-*/
   const [pointedOffer, setPointedOffer] = useState<Offer | null>(null);
   const points = offers.map((offer) => ({id: offer.id, location: offer.location}));
 
